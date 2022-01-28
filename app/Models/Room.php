@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Booking;
 
 class Room extends Model
 {
@@ -16,10 +17,15 @@ class Room extends Model
      */
     protected $fillable = [
         'roomName',
-        'room_type_id',
         'roomType',
         'roomRatings',
         'roomPrice',
         'roomDescription'
     ];
+
+    // Define model relationship: hasMany Bookings Table
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class);
+    }
 }

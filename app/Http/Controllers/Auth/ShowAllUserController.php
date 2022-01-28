@@ -14,7 +14,7 @@ class ShowAllUserController extends Controller
      * @return \Illuminate\Http\Response
     */
 
-    public function showAllUsers(Request $request)
+    public function showAllUsers()
     {
         $user = User::all();
 

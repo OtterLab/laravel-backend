@@ -18,4 +18,35 @@ class CreateRoomController extends Controller
      * @param [string] roomRatings
      * @param [string] roomDescription
     */
+
+    public function createRoom(Request $request)
+    {
+        // validate incoming data
+        $request->validate([
+            'roomName' => 'required|string',
+            'roomType' => 'required|string',
+            'roomPrice' => 'required|string',
+            'roomRatings' => 'required|string',
+            'roomDescription' => 'required|string'
+        ]);
+
+        $room = Room::create([
+            'roomName' => $request->roomName,
+            'roomType' => $request->roomType,
+            'roomPrice' => $request->roomPrice,
+            'roomDescription' => $request->roomDescription
+        ]);
+
+        if($room->save()) {
+            return response()->json([
+                'rooms' => $room,
+                'message' => 'Room successfully created'
+            ], 201);
+        }
+        else {
+            return response()->json([
+                'error' => 'Unable to create room'
+            ], 422);
+        }
+    }
 }

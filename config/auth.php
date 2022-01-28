@@ -18,6 +18,12 @@ return [
         'passwords' => 'users',
     ],
 
+    'api' => [
+        'driver' => 'token',
+        'provider' => 'users',
+        'hash' => false,
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Authentication Guards

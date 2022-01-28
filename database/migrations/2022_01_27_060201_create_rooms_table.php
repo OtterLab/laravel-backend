@@ -17,7 +17,6 @@ class CreateRoomsTable extends Migration
             $table->id();
             //$table->string('roomImage');
             $table->string('roomName');
-            $table->bigInteger('room_type_id')->unsigned();
             $table->string('roomType');
             $table->string('roomRatings');
             $table->string('roomPrice');

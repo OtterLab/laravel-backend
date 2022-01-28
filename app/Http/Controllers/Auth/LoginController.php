@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\User;
 
 class LoginController extends Controller
 {
@@ -25,20 +24,25 @@ class LoginController extends Controller
         ]);
 
         $credentials = request(['email', 'password']);
-        if(Auth::attempt($credentials)) {
+        if(!Auth::attempt($credentials)) {
             // return error message if user is not authenticated
             return response()->json([
                 'error' => 'Incorrect email or password'
             ], 401);
         }
 
-        $user = $request->user();
+        $user = $request->Auth::user();
+        
         $token = $user->createToken('apptoken')->plainTextToken;
+
+        $cookie = cookie('jwt', $token);
+        // $user = $request->user();
+        //$token = $user->createToken('apptoken')->plainTextToken;
 
         return response()->json([
             'access_token' => $token,
             'login_user' => $user,
             'message' => 'Login successfully'
-        ], 202);
+        ], 202)->withCookie($cookie);
     }
 }
