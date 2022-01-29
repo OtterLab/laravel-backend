@@ -31,18 +31,14 @@ class LoginController extends Controller
             ], 401);
         }
 
-        $user = $request->Auth::user();
-        
-        $token = $user->createToken('apptoken')->plainTextToken;
+        $user = $request->user();
 
-        $cookie = cookie('jwt', $token);
-        // $user = $request->user();
-        //$token = $user->createToken('apptoken')->plainTextToken;
+        $token = $user->createToken('apptoken')->plainTextToken;
 
         return response()->json([
             'access_token' => $token,
             'login_user' => $user,
             'message' => 'Login successfully'
-        ], 202)->withCookie($cookie);
+        ], 202);
     }
 }

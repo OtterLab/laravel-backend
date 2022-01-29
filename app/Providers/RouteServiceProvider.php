@@ -54,10 +54,16 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @return void
      */
+
+    // After reached the limit, wait for 60 seconds to refresh.
+    // Users can send 100 requests per minute.
+    // Guest users can send 20 requests per minute.
     protected function configureRateLimiting()
     {
-        RateLimiter::for('api', function (Request $request) {
-            return Limit::perMinute(60)->by(optional($request->user())->id ?: $request->ip());
+        RateLimiter::for('auth', function (Request $request) {
+            return $request->user()
+            ? Limit::perMinute(100)->by($request->user()->id)
+            : Limit::perMinute(20)->by($request->ip());
         });
     }
 }

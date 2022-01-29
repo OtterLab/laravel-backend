@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Auth\CreateAuthController;
 use App\Http\Controllers\Auth\GetAuthUserController;
-use App\Http\Controllers\Auth\UpdateAuthController;
+use App\Http\Controllers\Auth\UpdateUserController;
 use App\Http\Controllers\Auth\DeleteUserController;
 use App\Http\Controllers\Auth\ShowAllUserController;
 use App\Http\Controllers\Auth\LoginController;
@@ -21,11 +21,6 @@ use App\Http\Controllers\Booking\UpdateBookingController;
 use App\Http\Controllers\Booking\DeleteBookingController;
 use App\Http\Controllers\Booking\ShowAllBookingController;
 
-use App\Http\Controllers\RoomType\CreateRoomTypeController;
-use App\Http\Controllers\RoomType\UpdateRoomTypeController;
-use App\Http\Controllers\RoomType\DeleteRoomTypeController;
-use App\Http\Controllers\RoomType\ShowAllRoomTypeController;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -37,6 +32,32 @@ use App\Http\Controllers\RoomType\ShowAllRoomTypeController;
 |
 */
 
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
+Route::group(['prefix' => 'auth'], function() {
+    Route::post('register', [CreateAuthController::class, 'register']);
+    Route::post('login', [LoginController::class, 'login']);
+    Route::get('showAllUsers', [ShowAllUserController::class, 'showAllUsers']);
+    Route::get('getUser/{id}', [UpdateUserController::class, 'getUser/{id}']);
+    Route::post('updateUser/{id}', [UpdateUserController::class, 'updateUser']);
+    Route::delete('deleteUser/{id}', [DeleteUserController::class, 'deleteUser/{id}']);
+
+    Route::group(['middleware' => 'auth:sanctum'], function() {
+        Route::get('logout', [LogoutController::class, 'logout']);
+        Route::get('getAuthUser', [GetAuthUserController::class, 'getAuthUser']);
+    });
+});
+
+Route::group(['prefix' => 'room'], function() {
+    Route::post('createRoom', [CreateRoomController::class, 'createRoom']);
+    Route::get('showAllRooms', [ShowAllRoomController::class, 'showAllRooms']);
+    Route::get('getRoom/{id}', [UpdateRoomController::class, 'getRoom/{id}']);
+    Route::post('updateRoom/{id}', [UpdateRoomController::class, 'updateRoom']);
+    Route::delete('deleteRoom/{id}', [DeleteRoomController::class, 'deleteRoom/{id}']);
+});
+
+Route::group(['prefix' => 'booking'], function() {
+    Route::post('createBooking', [CreateBookingController::class, 'createBooking']);
+    Route::get('showAllBookings', [ShowAllBookingController::class, 'showAllBookings']);
+    Route::get('getBooking/{id}', [UpdateBookingController::class, 'getBooking/{id}']);
+    Route::post('updateBooking/{id}', [UpdateBookingController::class, 'updateBooking']);
+    Route::delete('deleteBooking/{id}', [DeleteBookingController::class, 'deleteBooking/{id}']);
+});

@@ -21,7 +21,6 @@ class CreateRoomsTable extends Migration
             $table->string('roomRatings');
             $table->string('roomPrice');
             $table->mediumText('roomDescription');
-            $table->foreign('room_type_id')->references('id')->on('room_types')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }
