@@ -12,7 +12,6 @@ class CreateRoomController extends Controller
      * Create new Room
      * 
      * @param [string] roomName
-     * @param [string] room_type_id
      * @param [string] roomType
      * @param [string] roomPrice
      * @param [string] roomRatings

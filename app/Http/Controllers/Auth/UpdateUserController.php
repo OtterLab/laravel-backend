@@ -26,7 +26,7 @@ class UpdateUserController extends Controller
         // validate incoming data
         $request->validate([
             'email' => 'required|string|email',
-            'password' => 'required|string|min:5|max:18',
+            'password' => 'required|string|min:8|max:18',
             'fullname' => 'required|string',
             'phone' => 'required|numeric',
             'user_type' => 'required|string|in:admin'
