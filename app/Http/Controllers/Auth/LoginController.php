@@ -27,6 +27,8 @@ class LoginController extends Controller
         $credentials = request(['email', 'password']);
         if(!Auth::attempt($credentials)) {
 
+            $LoginUser = Auth::user();
+            
             // Check email
             $LoginUser = User::where('email', $credentials['email'])->first();
 
@@ -41,6 +43,7 @@ class LoginController extends Controller
 
         return response()->json([
             'login_user' => $LoginUser,
+            'token_type' => 'Bearer',
             'token' => $token,
             'message' => 'Login successfully'
         ], 202);
