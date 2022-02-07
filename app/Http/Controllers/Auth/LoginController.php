@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class LoginController extends Controller
 {
@@ -25,19 +26,22 @@ class LoginController extends Controller
 
         $credentials = request(['email', 'password']);
         if(!Auth::attempt($credentials)) {
+
+            // Check email
+            $LoginUser = User::where('email', $credentials['email'])->first();
+
             // return error message if user is not authenticated
             return response()->json([
                 'error' => 'Incorrect email or password'
             ], 401);
         }
 
-        $user = $request->user();
-
-        $token = $user->createToken('apptoken')->plainTextToken;
+        $LoginUser = $request->user();
+        $token = $LoginUser->createToken('apptoken')->plainTextToken;
 
         return response()->json([
-            'access_token' => $token,
-            'login_user' => $user,
+            'login_user' => $LoginUser,
+            'token' => $token,
             'message' => 'Login successfully'
         ], 202);
     }

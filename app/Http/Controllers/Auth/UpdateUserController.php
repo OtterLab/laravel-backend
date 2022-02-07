@@ -29,7 +29,7 @@ class UpdateUserController extends Controller
             'password' => 'required|string|min:8|max:18',
             'fullname' => 'required|string',
             'phone' => 'required|numeric',
-            'user_type' => 'required|string|in:admin'
+            'user_type' => 'required|string'
         ]);
 
         $user = User::FindOrFail($id);

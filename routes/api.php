@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Auth\CreateAuthController;
-use App\Http\Controllers\Auth\GetAuthUserController;
+use App\Http\Controllers\Auth\GetAuthController;
 use App\Http\Controllers\Auth\UpdateUserController;
 use App\Http\Controllers\Auth\DeleteUserController;
 use App\Http\Controllers\Auth\ShowAllUserController;
@@ -42,7 +42,7 @@ Route::group(['prefix' => 'auth'], function() {
 
     Route::group(['middleware' => 'auth:sanctum'], function() {
         Route::get('logout', [LogoutController::class, 'logout']);
-        Route::get('getAuthUser', [GetAuthUserController::class, 'getAuthUser']);
+        Route::get('getAuthUser', [GetAuthController::class, 'getAuthUser']);
     });
 });
 

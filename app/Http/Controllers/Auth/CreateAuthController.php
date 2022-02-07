@@ -26,7 +26,7 @@ class CreateAuthController extends Controller
             'password' => 'required|string|min:8|max:18',
             'fullname' => 'required|string',
             'phone' => 'required|numeric',
-            'user_type' => 'required|string|in:admin'
+            'user_type' => 'required|string'
         ]);
 
         $user = User::create([
@@ -42,7 +42,7 @@ class CreateAuthController extends Controller
 
             return response()->json([
                 'message' => 'User successfully created',
-                'access_token' => $token
+                'token' => $token
             ], 201);
         }
         else {
