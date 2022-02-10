@@ -24,15 +24,15 @@ class CreateRoomController extends Controller
         $request->validate([
             'roomName' => 'required|string',
             'roomType' => 'required|string',
-            'roomPrice' => 'required|string',
             'roomRatings' => 'required|string',
+            'roomPrice' => 'required|string',
             'roomDescription' => 'required|string'
         ]);
 
         $room = Room::create([
-            'roomImage' => $request->roomImage,
             'roomName' => $request->roomName,
             'roomType' => $request->roomType,
+            'roomRatings' => $request->roomRatings,
             'roomPrice' => $request->roomPrice,
             'roomDescription' => $request->roomDescription
         ]);

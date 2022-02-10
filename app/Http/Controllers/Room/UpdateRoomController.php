@@ -27,16 +27,16 @@ class UpdateRoomController extends Controller
         $request->validate([
             'roomName' => 'required|string',
             'roomType' => 'required|string',
-            'roomPrice' => 'required|string',
             'roomRatings' => 'required|string',
+            'roomPrice' => 'required|string',
             'roomDescription' => 'required|string'
         ]);
 
         $room = Room::FindOrFail($id);
         $room->roomName = $request->get('roomName');
         $room->roomType = $request->get('roomType');
-        $room->roomPrice = $request->get('roomPrice');
         $room->roomRatings = $request->get('roomRatings');
+        $room->roomPrice = $request->get('roomPrice');
         $room->roomDescription = $request->get('roomDescription');
 
         if($room->update($request->all())) {

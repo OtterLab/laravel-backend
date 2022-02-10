@@ -49,7 +49,7 @@ Route::group(['prefix' => 'auth'], function() {
 Route::group(['prefix' => 'room'], function() {
     Route::post('createRoom', [CreateRoomController::class, 'createRoom']);
     Route::get('showAllRooms', [ShowAllRoomController::class, 'showAllRooms']);
-    Route::get('getRoom/{id}', [UpdateRoomController::class, 'getRoom/{id}']);
+    Route::get('getRoom/{id}', [UpdateRoomController::class, 'getRoom']);
     Route::post('updateRoom/{id}', [UpdateRoomController::class, 'updateRoom']);
     Route::delete('deleteRoom/{id}', [DeleteRoomController::class, 'deleteRoom/{id}']);
 });
@@ -57,7 +57,7 @@ Route::group(['prefix' => 'room'], function() {
 Route::group(['prefix' => 'booking'], function() {
     Route::post('createBooking', [CreateBookingController::class, 'createBooking']);
     Route::get('showAllBookings', [ShowAllBookingController::class, 'showAllBookings']);
-    Route::get('getBooking/{id}', [UpdateBookingController::class, 'getBooking/{id}']);
+    Route::get('getBooking/{id}', [UpdateBookingController::class, 'getBooking']);
     Route::post('updateBooking/{id}', [UpdateBookingController::class, 'updateBooking']);
     Route::delete('deleteBooking/{id}', [DeleteBookingController::class, 'deleteBooking/{id}']);
 });
