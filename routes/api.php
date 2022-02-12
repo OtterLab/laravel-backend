@@ -36,9 +36,9 @@ Route::group(['prefix' => 'auth'], function() {
     Route::post('register', [CreateAuthController::class, 'register']);
     Route::post('login', [LoginController::class, 'login']);
     Route::get('showAllUsers', [ShowAllUserController::class, 'showAllUsers']);
-    Route::get('getUser/{id}', [UpdateUserController::class, 'getUser/{id}']);
+    Route::get('getUser/{id}', [UpdateUserController::class, 'getUser']);
     Route::post('updateUser/{id}', [UpdateUserController::class, 'updateUser']);
-    Route::delete('deleteUser/{id}', [DeleteUserController::class, 'deleteUser/{id}']);
+    Route::delete('deleteUser/{id}', [DeleteUserController::class, 'deleteUser']);
 
     Route::group(['middleware' => 'auth:sanctum'], function() {
         Route::get('logout', [LogoutController::class, 'logout']);
@@ -51,7 +51,7 @@ Route::group(['prefix' => 'room'], function() {
     Route::get('showAllRooms', [ShowAllRoomController::class, 'showAllRooms']);
     Route::get('getRoom/{id}', [UpdateRoomController::class, 'getRoom']);
     Route::post('updateRoom/{id}', [UpdateRoomController::class, 'updateRoom']);
-    Route::delete('deleteRoom/{id}', [DeleteRoomController::class, 'deleteRoom/{id}']);
+    Route::delete('deleteRoom/{id}', [DeleteRoomController::class, 'deleteRoom']);
 });
 
 Route::group(['prefix' => 'booking'], function() {
@@ -59,5 +59,5 @@ Route::group(['prefix' => 'booking'], function() {
     Route::get('showAllBookings', [ShowAllBookingController::class, 'showAllBookings']);
     Route::get('getBooking/{id}', [UpdateBookingController::class, 'getBooking']);
     Route::post('updateBooking/{id}', [UpdateBookingController::class, 'updateBooking']);
-    Route::delete('deleteBooking/{id}', [DeleteBookingController::class, 'deleteBooking/{id}']);
+    Route::delete('deleteBooking/{id}', [DeleteBookingController::class, 'deleteBooking']);
 });
